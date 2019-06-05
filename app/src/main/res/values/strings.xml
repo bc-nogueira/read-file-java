@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ReadFileJava</string>
+    <string name="read_btn">Read</string>
+</resources>
