@@ -30,11 +30,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void readFile() {
+        Button readBtn = findViewById(R.id.readBtn);
+        readBtn.setVisibility(View.INVISIBLE);
+
+        long begin = System.nanoTime();
+
         ActivityCompat.requestPermissions(MainActivity.this,
                 new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
 
         File sdCard = Environment.getExternalStorageDirectory();// storage/emulated/0
-        File file = new File(sdCard, "/Download/hello.txt");
+        File file = new File(sdCard, "/Download/fileJava.txt");
 
         StringBuilder text = new StringBuilder();
 
@@ -51,7 +56,10 @@ public class MainActivity extends AppCompatActivity {
             System.out.println("Error: " + e);
         }
 
-        TextView tv = findViewById(R.id.fileContent);
-        tv.setText(text.toString());
+        long difference = (System.nanoTime() - begin)/1000000;
+        TextView statusTxt = findViewById(R.id.statusTxt);
+        statusTxt.setText("Read file in " + difference + "ms");
+        TextView contentTxt = findViewById(R.id.fileContent);
+        contentTxt.setText(text.toString());
     }
 }
